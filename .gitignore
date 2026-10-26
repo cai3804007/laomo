@@ -8,11 +8,6 @@ __pycache__/
 # Swift 编译产物，用 README 里的命令重建
 bin/ocr_vision
 
-# ===== 机密：以下均为登录凭证，绝不能提交 =====
-# 公众号后台登录态（token + cookie），等同后台密码
-.mp_cred.json
+# ===== 机密 =====
 # Server酱 SendKey
 .env
-# 临时凭证文件
-cookie.txt
-*.curl
