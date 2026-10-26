@@ -2,40 +2,172 @@
   "_说明": "化名/型号 → 真实标的对照表。他文章里只用化名，型号 L601M628 这种形式去掉字母即为代码。",
   "_来源": "10-25 周末盘点表格图（15 个完整映射）+ 各篇进货文章",
   "_更新": "遇到新化名时追加。confirmed=false 的需人工复核后再采信。",
-
   "map": {
-    "伊人瘦":   {"code": "601628", "name": "中国人寿", "model": "L601M628", "product": "无线鼠标", "confirmed": true},
-    "中国人瘦": {"code": "601628", "name": "中国人寿", "model": null,       "product": null,       "confirmed": true,
-                 "note": "10-26 卖出文里的叫法，与「伊人瘦」同一标的"},
-    "董格利":   {"code": "000651", "name": "格力电器", "model": "L000M651", "product": "CPU线",   "confirmed": true},
-    "格利":     {"code": "000651", "name": "格力电器", "model": "L000M651", "product": "小家电",   "confirmed": true},
-    "双汇火腿": {"code": "000895", "name": "双汇发展", "model": "L000M895", "product": "内存条码", "confirmed": true},
-    "吴海发":   {"code": "601866", "name": "中远海发", "model": "L601M866", "product": "插座板",   "confirmed": true},
-    "中原法海": {"code": "601866", "name": "中远海发", "model": "M866",     "product": null,       "confirmed": true,
-                 "note": "与「白娘子 L601」配对拼出 601866"},
-    "付海港":   {"code": "000507", "name": "珠海港",   "model": "L000M507", "product": "网卡room", "confirmed": true},
-    "席光大":   {"code": "601788", "name": "光大证券", "model": "L601M788", "product": "电子配件", "confirmed": true},
-    "尚机场":   {"code": "600009", "name": "上海机场", "model": "L600M009", "product": "路由模块", "confirmed": true},
-    "吕铁建":   {"code": "601186", "name": "中国铁建", "model": "L601M186", "product": "转化器",   "confirmed": true},
-    "李京能":   {"code": "600578", "name": "京能电力", "model": "L600M578", "product": "电路板线", "confirmed": true},
-    "张青啤":   {"code": "600600", "name": "青岛啤酒", "model": "L600M600", "product": "芯片设计", "confirmed": true},
-    "李银河":   {"code": "601881", "name": "中国银河", "model": "L601M881", "product": "蓝牙模块", "confirmed": true},
-    "钟黄金":   {"code": "600916", "name": "中国黄金", "model": "L600M916", "product": "光驱模块", "confirmed": true},
-    "李能建":   {"code": "601868", "name": "中国能建", "model": "L601M868", "product": "热缩管",   "confirmed": true},
-    "余中铁":   {"code": "601390", "name": "中国中铁", "model": "L601M390", "product": "二极管",   "confirmed": true},
-    "张海航":   {"code": "600221", "name": "海航控股", "model": "L600M221", "product": "数据线",   "confirmed": true},
-    "海尔兄弟": {"code": "600690", "name": "海尔智家", "model": null,       "product": null,       "confirmed": true,
-                 "note": "文中未给型号。按基本面反推(2025利润195.5亿/G-SYL=10/分红5.7%)，并用进货价19.55对现价19.54验证"}
+    "伊人瘦": {
+      "code": "601628",
+      "name": "中国人寿",
+      "model": "L601M628",
+      "product": "无线鼠标",
+      "confirmed": true
+    },
+    "中国人瘦": {
+      "code": "601628",
+      "name": "中国人寿",
+      "model": null,
+      "product": null,
+      "confirmed": true,
+      "note": "10-26 卖出文里的叫法，与「伊人瘦」同一标的"
+    },
+    "董格利": {
+      "code": "000651",
+      "name": "格力电器",
+      "model": "L000M651",
+      "product": "CPU线",
+      "confirmed": true
+    },
+    "格利": {
+      "code": "000651",
+      "name": "格力电器",
+      "model": "L000M651",
+      "product": "小家电",
+      "confirmed": true
+    },
+    "双汇火腿": {
+      "code": "000895",
+      "name": "双汇发展",
+      "model": "L000M895",
+      "product": "内存条码",
+      "confirmed": true
+    },
+    "吴海发": {
+      "code": "601866",
+      "name": "中远海发",
+      "model": "L601M866",
+      "product": "插座板",
+      "confirmed": true
+    },
+    "中原法海": {
+      "code": "601866",
+      "name": "中远海发",
+      "model": "M866",
+      "product": null,
+      "confirmed": true,
+      "note": "与「白娘子 L601」配对拼出 601866"
+    },
+    "付海港": {
+      "code": "000507",
+      "name": "珠海港",
+      "model": "L000M507",
+      "product": "网卡room",
+      "confirmed": true
+    },
+    "席光大": {
+      "code": "601788",
+      "name": "光大证券",
+      "model": "L601M788",
+      "product": "电子配件",
+      "confirmed": true
+    },
+    "尚机场": {
+      "code": "600009",
+      "name": "上海机场",
+      "model": "L600M009",
+      "product": "路由模块",
+      "confirmed": true
+    },
+    "吕铁建": {
+      "code": "601186",
+      "name": "中国铁建",
+      "model": "L601M186",
+      "product": "转化器",
+      "confirmed": true
+    },
+    "李京能": {
+      "code": "600578",
+      "name": "京能电力",
+      "model": "L600M578",
+      "product": "电路板线",
+      "confirmed": true
+    },
+    "张青啤": {
+      "code": "600600",
+      "name": "青岛啤酒",
+      "model": "L600M600",
+      "product": "芯片设计",
+      "confirmed": true
+    },
+    "李银河": {
+      "code": "601881",
+      "name": "中国银河",
+      "model": "L601M881",
+      "product": "蓝牙模块",
+      "confirmed": true
+    },
+    "钟黄金": {
+      "code": "600916",
+      "name": "中国黄金",
+      "model": "L600M916",
+      "product": "光驱模块",
+      "confirmed": true
+    },
+    "李能建": {
+      "code": "601868",
+      "name": "中国能建",
+      "model": "L601M868",
+      "product": "热缩管",
+      "confirmed": true
+    },
+    "余中铁": {
+      "code": "601390",
+      "name": "中国中铁",
+      "model": "L601M390",
+      "product": "二极管",
+      "confirmed": true
+    },
+    "张海航": {
+      "code": "600221",
+      "name": "海航控股",
+      "model": "L600M221",
+      "product": "数据线",
+      "confirmed": true
+    },
+    "海尔兄弟": {
+      "code": "600690",
+      "name": "海尔智家",
+      "model": null,
+      "product": null,
+      "confirmed": true,
+      "note": "文中未给型号。按基本面反推(2025利润195.5亿/G-SYL=10/分红5.7%)，并用进货价19.55对现价19.54验证"
+    }
   },
-
   "unresolved": {
     "_注": "出现过但尚未确定代码的化名，需要更多线索。不要猜。",
-    "建筑大哥": {"clue": "9/16 以 4.24 买 1 万件，9/23 涨到 4.34 卖出赚 1000 元"},
-    "顺风物流品": {"clue": "10-19 盈利卖出"},
-    "义乌玩具小商品": {"clue": "10-23 盈利卖出"},
-    "五姑娘": {"clue": "历史烂账，因胡乱加仓导致巨额亏损"},
-    "方片A": {"clue": "科技股，用逢跌8次建仓模式，每次1000件"},
-    "小德子": {"clue": "科技股，与方片A、小赵同批买卖"},
-    "小赵": {"clue": "科技股，跌破400元会建仓，每次买100件"}
+    "建筑大哥": {
+      "clue": "9/16 以 4.24 买 1 万件，9/23 涨到 4.34 卖出赚 1000 元"
+    },
+    "顺风物流品": {
+      "clue": "10-19 盈利卖出"
+    },
+    "义乌玩具小商品": {
+      "clue": "10-16 第2次进货；补货标准 10.7，10-22 实际 10.47 补 2000 件；10-23 盈利卖出清仓。10派1 分红"
+    },
+    "五姑娘": {
+      "clue": "历史烂账，因胡乱加仓导致巨额亏损"
+    },
+    "恒生华夏兄姨TF": {
+      "clue": "ETF。10-22 暴跌时进 20000 件、投入不到 1 万（约 0.5 元/件），比上次低 7%"
+    }
+  },
+  "out_of_model": {
+    "_注": "作者明确声明不属于「略亏少赚不被套」模型，走「逢跌8次」且独立测试中。他原话：「电子产品我不分享，仅分享流水，风险太大，大家切勿模仿」。不纳入盯盘。",
+    "小赵阿姨": {
+      "clue": "电子产品，逢跌8次已用6-7个名额；273→282、275→285 做过多次日内/隔日T；约 270-290 元价位"
+    },
+    "方片A": {
+      "clue": "电子产品，逢跌8次每次1000件"
+    },
+    "小德子": {
+      "clue": "电子产品，与方片A、小赵同批买卖"
+    }
   }
 }

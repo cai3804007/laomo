@@ -91,5 +91,437 @@
       }
     ],
     "src": "10月20日第2次进货中原法海商品的思路"
+  },
+  "000895": {
+    "name": "双汇发展",
+    "alias": "双汇火腿",
+    "entry": 23.94,
+    "entry_qty": null,
+    "entry_date": "26.9.1",
+    "latest_cost": 23.8,
+    "cost_marks": "补差",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 23.21,
+        "qty": null,
+        "sell": 24.09,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 22.61,
+        "qty": null,
+        "sell": 23.47,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 21.66,
+        "qty": null,
+        "sell": 22.48,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "000507": {
+    "name": "珠海港",
+    "alias": "付海港",
+    "entry": 4.87,
+    "entry_qty": null,
+    "entry_date": "26.10.15",
+    "latest_cost": 4.81,
+    "cost_marks": "补",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 4.69,
+        "qty": null,
+        "sell": 4.87,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 4.57,
+        "qty": null,
+        "sell": 4.74,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 4.38,
+        "qty": null,
+        "sell": 4.54,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "601788": {
+    "name": "光大证券",
+    "alias": "席光大",
+    "entry": 13.7,
+    "entry_qty": null,
+    "entry_date": "26.10.14",
+    "latest_cost": 13.6,
+    "cost_marks": "补",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 13.26,
+        "qty": null,
+        "sell": 13.76,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 12.92,
+        "qty": null,
+        "sell": 13.41,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 12.38,
+        "qty": null,
+        "sell": 12.85,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "600009": {
+    "name": "上海机场",
+    "alias": "尚机场",
+    "entry": 24.6,
+    "entry_qty": null,
+    "entry_date": "26.7.22",
+    "latest_cost": 23.5,
+    "cost_marks": "补差红",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 22.91,
+        "qty": null,
+        "sell": 23.78,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 22.32,
+        "qty": null,
+        "sell": 23.17,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 21.39,
+        "qty": null,
+        "sell": 22.2,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "601186": {
+    "name": "中国铁建",
+    "alias": "吕铁建",
+    "entry": 6.96,
+    "entry_qty": null,
+    "entry_date": "26.3.27",
+    "latest_cost": 6.21,
+    "cost_marks": "补差红",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 6.05,
+        "qty": null,
+        "sell": 6.28,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 5.9,
+        "qty": null,
+        "sell": 6.12,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 5.65,
+        "qty": null,
+        "sell": 5.87,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "600578": {
+    "name": "京能电力",
+    "alias": "李京能",
+    "entry": 5.33,
+    "entry_qty": null,
+    "entry_date": "26.9.17",
+    "latest_cost": 5.23,
+    "cost_marks": "补差",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 5.1,
+        "qty": null,
+        "sell": 5.29,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 4.97,
+        "qty": null,
+        "sell": 5.16,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 4.76,
+        "qty": null,
+        "sell": 4.94,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "600600": {
+    "name": "青岛啤酒",
+    "alias": "张青啤",
+    "entry": 53.65,
+    "entry_qty": null,
+    "entry_date": "26.8.11",
+    "latest_cost": 53.53,
+    "cost_marks": "补差",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 52.19,
+        "qty": null,
+        "sell": 54.18,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 50.85,
+        "qty": null,
+        "sell": 52.79,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 48.71,
+        "qty": null,
+        "sell": 50.56,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "601881": {
+    "name": "中国银河",
+    "alias": "李银河",
+    "entry": 12.6,
+    "entry_qty": null,
+    "entry_date": "26.8.3",
+    "latest_cost": 12.22,
+    "cost_marks": "补差",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 11.91,
+        "qty": null,
+        "sell": 12.37,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 11.61,
+        "qty": null,
+        "sell": 12.05,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 11.12,
+        "qty": null,
+        "sell": 11.54,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "600916": {
+    "name": "中国黄金",
+    "alias": "钟黄金",
+    "entry": 7.73,
+    "entry_qty": null,
+    "entry_date": "26.9.11",
+    "latest_cost": 7.52,
+    "cost_marks": "补红",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 7.33,
+        "qty": null,
+        "sell": 7.61,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 7.14,
+        "qty": null,
+        "sell": 7.42,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 6.84,
+        "qty": null,
+        "sell": 7.1,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "601868": {
+    "name": "中国能建",
+    "alias": "李能建",
+    "entry": 2.56,
+    "entry_qty": null,
+    "entry_date": "26.7.24",
+    "latest_cost": 2.48,
+    "cost_marks": "补红",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 2.42,
+        "qty": null,
+        "sell": 2.51,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 2.36,
+        "qty": null,
+        "sell": 2.45,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 2.26,
+        "qty": null,
+        "sell": 2.34,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "601390": {
+    "name": "中国中铁",
+    "alias": "余中铁",
+    "entry": 5.36,
+    "entry_qty": null,
+    "entry_date": "26.3.27",
+    "latest_cost": 4.68,
+    "cost_marks": "补差红",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 4.56,
+        "qty": null,
+        "sell": 4.74,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 4.45,
+        "qty": null,
+        "sell": 4.61,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 4.26,
+        "qty": null,
+        "sell": 4.42,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
+  },
+  "600221": {
+    "name": "海航控股",
+    "alias": "张海航",
+    "entry": 1.35,
+    "entry_qty": null,
+    "entry_date": "26.7.15",
+    "latest_cost": 1.31,
+    "cost_marks": "补",
+    "target_profit": null,
+    "inferred": true,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 1.28,
+        "qty": null,
+        "sell": 1.33,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 1.24,
+        "qty": null,
+        "sell": 1.29,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 1.19,
+        "qty": null,
+        "sell": 1.24,
+        "held": false
+      }
+    ],
+    "src": "10-25 周末盘点表；补货点按模型标准参数 -2.5%/-5%/-9% 从**最新成本**推定。用最新成本而非首次进价，是因为老仓已补过货、摊薄过成本，按首次进价算会炸出一堆早已跌穿的历史档位。非作者公布。",
+    "anchor": "latest_cost"
   }
 }

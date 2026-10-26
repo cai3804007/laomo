@@ -47,9 +47,11 @@ def check(plans: dict, live: dict) -> tuple[list, dict]:
                 now_on[key] = today
                 if key not in state:
                     hits.append({"code": code, "name": p["name"], "px": px, "kind": kind,
-                                 "n": t["n"], "trig": trig, "qty": t["qty"], "plan": p})
+                                 "n": t["n"], "trig": trig, "qty": t.get("qty"), "plan": p})
 
-        # 主仓清仓目标：目标利润折算成需要的价格
+        # 主仓清仓目标。推定计划没有目标利润和首仓数量，跳过这项检查
+        if not (p.get("target_profit") and p.get("entry_qty")):
+            continue
         exit_px = round(p["entry"] + p["target_profit"] / p["entry_qty"], 3)
         key = f"{code}:exit"
         if px >= exit_px:
@@ -63,15 +65,28 @@ def check(plans: dict, live: dict) -> tuple[list, dict]:
 def plan_table(p: dict, px: float, hl: set | None = None) -> list[str]:
     """渲染某只标的的完整计划，hl 是本次触发的档号集合（可能同时触发多档）。"""
     hl = hl or set()
-    exit_px = round(p["entry"] + p["target_profit"] / p["entry_qty"], 3)
+    has_exit = bool(p.get("target_profit") and p.get("entry_qty"))
+    exit_px = round(p["entry"] + p["target_profit"] / p["entry_qty"], 3) if has_exit else None
+    q = lambda v: f"{v:,}" if v else "—"
+
     L = ["| 档位 | 买入价 | 数量 | 卖出价 | 状态 | 距现价 |", "|---|---|---|---|---|---|",
-         f"| 首仓 | {p['entry']:g} | {p['entry_qty']:,} | {exit_px:g}(清仓) | 持有 | "
-         f"{(exit_px-px)/px*100:+.1f}% |"]
+         f"| 首仓 | {p['entry']:g} | {q(p.get('entry_qty'))} | "
+         f"{f'{exit_px:g}(清仓)' if has_exit else '—'} | 持有 | "
+         f"{f'{(exit_px-px)/px*100:+.1f}%' if has_exit else '—'} |"]
     for t in p["tranches"]:
         mark = "**← 触发**" if t["n"] in hl else ("已持有" if t.get("held") else "待触发")
         tgt = t["sell"] if t.get("held") else t["buy"]
-        L.append(f"| 补{t['n']} | {t['buy']:g} | {t['qty']:,} | {t['sell']:g} | {mark} | "
+        L.append(f"| 补{t['n']} | {t['buy']:g} | {q(t.get('qty'))} | {t['sell']:g} | {mark} | "
                  f"{(tgt-px)/px*100:+.1f}% |")
+    if p.get("inferred"):
+        marks = {"补": "补过仓", "差": "做过价差", "红": "分过红"}
+        done = "、".join(marks[c] for c in p.get("cost_marks", "") if c in marks)
+        L += ["",
+              f"> ⚠️ **补货点为推定，非作者公布。** 按模型标准参数 −2.5%/−5%/−9%，"
+              f"从**最新成本 {p['latest_cost']:g}** 算出"
+              + (f"（该标的{done}，成本已由首次进价 {p['entry']:g} 摊薄到此）。" if done
+                 else f"（首次进价 {p['entry']:g}）。"),
+              "> 他的真实补货表在该标的的原始进货文章里，尚未收录。"]
     return L
 
 
@@ -89,7 +104,8 @@ def render(hits: list) -> tuple[str, str]:
         for h in hs:
             icon = {"买入": "🔴", "卖出": "🟢", "清仓": "🎯"}[h["kind"]]
             what = "清仓目标" if h["kind"] == "清仓" else f"补{h['n']} {h['kind']}"
-            L.append(f"{icon} **{what}** 触发价 {h['trig']:g} ｜ {h['qty']:,} 股")
+            qty = f" ｜ {h['qty']:,} 股" if h.get("qty") else ""
+            L.append(f"{icon} **{what}** 触发价 {h['trig']:g}{qty}")
         L += [""] + plan_table(p, px, hl={h["n"] for h in hs if h["n"]}) + [""]
 
     L += ["---", f"*{d:%Y-%m-%d %H:%M} ｜ 价位来自文章机器识别，下单前核对原文 ｜ 该模型无止损*"]
