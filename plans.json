@@ -1,0 +1,95 @@
+{
+  "600690": {
+    "name": "海尔智家",
+    "entry": 19.55,
+    "entry_qty": 3000,
+    "entry_date": "2026-10-26",
+    "target_profit": 2300,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 19.0,
+        "qty": 1500,
+        "sell": 19.7,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 18.5,
+        "qty": 1500,
+        "sell": 19.3,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 17.6,
+        "qty": 1000,
+        "sell": 18.5,
+        "held": false
+      }
+    ],
+    "src": "10月26日第4次进货海尔兄弟的思路"
+  },
+  "000651": {
+    "name": "格力电器",
+    "entry": 36.8,
+    "entry_qty": 2000,
+    "entry_date": "2026-10-21",
+    "target_profit": 3000,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 36.0,
+        "qty": 700,
+        "sell": 37.5,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 35.0,
+        "qty": 700,
+        "sell": 36.5,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 33.5,
+        "qty": 700,
+        "sell": 35.0,
+        "held": false
+      }
+    ],
+    "src": "10月21日第4次进货格利小家电的思路"
+  },
+  "601866": {
+    "name": "中远海发",
+    "entry": 2.36,
+    "entry_qty": 25000,
+    "entry_date": "2026-10-20",
+    "target_profit": 2200,
+    "tranches": [
+      {
+        "n": 1,
+        "buy": 2.3,
+        "qty": 10000,
+        "sell": 2.4,
+        "held": false
+      },
+      {
+        "n": 2,
+        "buy": 2.23,
+        "qty": 10000,
+        "sell": 2.3,
+        "held": false
+      },
+      {
+        "n": 3,
+        "buy": 2.15,
+        "qty": 10000,
+        "sell": 2.22,
+        "held": false
+      }
+    ],
+    "src": "10月20日第2次进货中原法海商品的思路"
+  }
+}

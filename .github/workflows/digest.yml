@@ -1,0 +1,48 @@
+name: 每日持仓推送
+
+on:
+  schedule:
+    # A 股 15:00 收盘 = 07:00 UTC，收盘后 20 分钟跑
+    - cron: '20 7 * * 1-5'
+  workflow_dispatch:        # 支持手动触发
+
+permissions:
+  contents: read
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 检查持仓数据
+        id: check
+        run: |
+          # holdings 数据默认在 out/（已 gitignore），仓库里拿不到。
+          # 补数据有两种方式，见 README「云端推送」一节。
+          if [ -f data/holdings.json ] || [ -f out/holdings.json ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::未找到持仓数据，跳过推送。把 holdings.json 放到 data/ 即可启用。"
+          fi
+
+      - name: 生成并推送
+        if: steps.check.outputs.ready == 'true'
+        env:
+          SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
+          SERVERCHAN_TAGS: ${{ vars.SERVERCHAN_TAGS }}
+        run: |
+          if [ -z "$SERVERCHAN_SENDKEY" ]; then
+            echo "::error::缺少 secret SERVERCHAN_SENDKEY"
+            exit 1
+          fi
+          python mp/digest.py --push
