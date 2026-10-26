@@ -1,0 +1,57 @@
+name: 盯盘告警
+
+on:
+  schedule:
+    # A 股交易时段 09:30-11:30 / 13:00-15:00（UTC+8）= UTC 01:30-03:30 / 05:00-07:00
+    # 盘中每小时查一次，收盘后再查一次
+    - cron: '0 2,3,6,7 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: '忽略去重，重推当前所有触发'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write        # 需要把 state/alerted.json 写回仓库做去重
+
+concurrency:
+  group: alert           # 避免两次调度叠在一起同时写 state
+  cancel-in-progress: false
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: 检查触发并推送
+        env:
+          SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
+          SERVERCHAN_TAGS: ${{ vars.SERVERCHAN_TAGS }}
+        run: |
+          if [ -z "$SERVERCHAN_SENDKEY" ]; then
+            echo "::error::缺少 secret SERVERCHAN_SENDKEY"
+            exit 1
+          fi
+          python mp/alert.py --push ${{ inputs.force && '--force' || '' }}
+
+      - name: 回写去重状态
+        run: |
+          # state 变了才提交，否则每次调度都产生空提交
+          if [ -n "$(git status --porcelain state/)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/
+            git commit -m "chore: 更新告警去重状态 [skip ci]"
+            git push
+          else
+            echo "状态无变化，跳过提交"
+          fi

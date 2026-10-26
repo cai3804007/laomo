@@ -37,6 +37,18 @@
 `mp/quote.py` 按出现顺序拼接数字，校验是否为合法 A 股代码（60/68/00/30 开头），
 再查新浪行情接口拿真实名称和实时价。
 
+**但有些文章全程只用化名不给型号**（如 10-26「卖出中国人瘦 + 进货海尔兄弟」那篇），
+型号匹配会落空。所以维护了一本词典 [`aliases.json`](aliases.json)：
+
+```
+伊人瘦→601628 中国人寿    董格利→000651 格力电器    吴海发→601866 中远海发
+双汇火腿→000895 双汇发展   张青啤→600600 青岛啤酒    余中铁→601390 中国中铁  ...
+```
+
+19 条映射覆盖 16 只标的，主要来自 10-25 周末盘点的表格图。`decode_all()` 先试型号、
+再查词典，一篇多标的也能全部解出。尚未确定的化名（建筑大哥、方片A、五姑娘等）
+单列在 `unresolved` 里**不猜**，等更多线索。
+
 ## 持仓摘要与推送
 
 ```bash
@@ -70,6 +82,31 @@
 环境变量优先级高于 `.env`（`mp/notify.py`），云端设了就生效，代码不用改。
 契约见 `.env.example`。
 
+## 盯盘告警
+
+```bash
+./.venv/bin/python mp/alert.py              # 只检查
+./.venv/bin/python mp/alert.py --push       # 命中才推送
+./.venv/bin/python mp/alert.py --force      # 忽略去重，重推当前所有触发
+```
+
+触发条件：
+
+| 类型 | 条件 |
+|---|---|
+| 🔴 买入 | 某档补货**未持有**，且现价 ≤ 该档触发价 |
+| 🟢 卖出 | 某档补货**已持有**，且现价 ≥ 该档价差卖价 |
+| 🎯 清仓 | 主仓现价 ≥ 清仓目标价（由目标利润折算） |
+
+推送内容包含**该标的的完整计划表**，并标出本次触发的档位（可同时触发多档）。
+
+**去重**：已推过的触发记在 `state/alerted.json`，不会每天重复轰炸。
+价格回到触发价之上、之后再跌回来，会被视为新触发重新提醒。
+
+`.github/workflows/alert.yml` 在交易时段每小时跑一次（UTC 02/03/06/07 点），
+并把去重状态回写仓库。只需 `plans.json`（已提交）和行情接口，**不依赖持仓数据，
+现在就能用**。
+
 ## 云端推送
 
 `.github/workflows/digest.yml` 每个交易日 15:20（A 股收盘后）推送，也可手动触发。
@@ -99,7 +136,10 @@ mkdir -p data && cp out/holdings.json data/ && git add data/ && git commit -m "a
 | `mp/notify.py` | Server酱推送（兼容 Server酱³ 和 Turbo） |
 | `model/plan.py` | 参数化建仓计划生成器 |
 | `model/params.json` | 模型参数，改这里就是改你自己的模型 |
+| `mp/alert.py` | 盯盘告警：命中补货点/卖点才推送，带去重 |
 | `plans.json` | 各标的的补货/卖出计划，随文章处理累积 |
+| `aliases.json` | 化名 → 真实标的对照表 |
+| `state/alerted.json` | 告警去重状态，由工作流回写 |
 | `bin/ocr_vision.swift` | macOS Vision OCR，`swiftc -O -o bin/ocr_vision bin/ocr_vision.swift` |
 
 ## 文档
