@@ -35,7 +35,6 @@ jobs:
       - name: 检查触发并推送
         env:
           SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
-          SERVERCHAN_TAGS: ${{ vars.SERVERCHAN_TAGS }}
         run: |
           if [ -z "$SERVERCHAN_SENDKEY" ]; then
             echo "::error::缺少 secret SERVERCHAN_SENDKEY"

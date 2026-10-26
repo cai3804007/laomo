@@ -74,13 +74,16 @@
 
 ## 环境变量
 
+**只有一个需要配置**：
+
 | 变量 | 用途 | 本地 | 云端 |
 |---|---|---|---|
 | `SERVERCHAN_SENDKEY` | Server酱推送密钥（机密） | `.env` | Actions **Secrets** |
-| `SERVERCHAN_TAGS` | 推送标签，App 端分组用 | `.env` | Actions **Variables** |
 
-环境变量优先级高于 `.env`（`mp/notify.py`），云端设了就生效，代码不用改。
-契约见 `.env.example`。
+推送标签已在 `mp/notify.py` 的 `DEFAULT_TAGS` 写死为 `laomo`，无需配置；
+临时要改可用 `SERVERCHAN_TAGS` 覆盖。
+
+环境变量优先级高于 `.env`，云端设了就生效，代码不用改。契约见 `.env.example`。
 
 ## 盯盘告警
 
