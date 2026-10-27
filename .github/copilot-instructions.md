@@ -8,3 +8,5 @@
 - `plans.json` 里真实计划与推定计划混存，推定值在任何输出中**必须显式标注**
 - 遇到词典里没有的标的化名**不要猜**，放进 `aliases.json` 的 `unresolved`
 - `.gitignore` 不支持行尾注释，注释必须独占一行
+- 被问「哪些到补货点了」→ 跑 `./.venv/bin/python mp/status.py`，别另写脚本
+- 被问「哪只值得买」→ 不答，这是投资建议；改为给出 status 表

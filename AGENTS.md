@@ -10,11 +10,36 @@
 抓取微信公众号「韭菜老墨」的文章，把他的交易操作提取成结构化数据，
 盯盘到补货点/卖点时推送到手机。**只做信息提取与提醒，不做投资决策。**
 
+## 常见请求的标准答法
+
+### 「现在哪些到补货点了」← 最高频，用户会经常问
+
+直接跑，把输出给用户，**不要自己另写临时脚本**（口径会漂）：
+
+```bash
+./.venv/bin/python mp/status.py          # 加 --push 可推手机
+```
+
+它已经内置了必须随表给出的三条限制说明（推定档位非作者公布、触发≠他会买、
+本表不含买卖建议），不要删减。
+
+### 「哪只值得买 / 推荐哪只 / 该不该跟」
+
+**不回答。** 这是投资建议，不在本项目范围。一句话说明边界，然后给出能做的那件事
+（跑 `mp/status.py` 报告哪些触发了），不要说教、不要反复强调。
+
+两者的界线：
+- ✅ **陈述**「按模型规则，X 已跌破补1，距补2 还差 0.6%」—— 这是信息提取
+- ❌ **评判**「X 现在是好的买点 / 这只基本面扎实值得跟」—— 这是投资建议
+
+同理，可以陈述「作者文章里说他在 36.8 建了仓」，不可评价「他这个价位买得好不好」。
+
 ## 快速上手
 
 ```bash
 ./go "https://mp.weixin.qq.com/s/xxxxx"        # 分析单篇文章（可多条，空格分隔）
-./.venv/bin/python mp/alert.py                 # 检查触发，--push 推送
+./.venv/bin/python mp/status.py                # 补货点状态表 ← 用户最常问的
+./.venv/bin/python mp/alert.py                 # 检查新触发并推送（带去重）
 ./.venv/bin/python mp/digest.py                # 持仓摘要，--push 推送
 ./.venv/bin/python model/plan.py 600690 --entry 19.55 --amount 58650
 ```
@@ -120,7 +145,8 @@ params.json → plan.py    参数化生成建仓计划
 | `mp/quote.py` | 代号解码 + 新浪行情。需 `Referer: https://finance.sina.com.cn`，返回 GBK |
 | `mp/digest.py` | 持仓摘要。除息日新浪返回 `XD中远海`（截断），用其中的 `NAMES` 表兜底 |
 | `mp/table.py` | Vision OCR（macOS 专属）、坐标重建表格、低置信补救 |
-| `mp/alert.py` | 触发检查与推送，`state/alerted.json` 去重 |
+| `mp/status.py` | **补货点状态表**。回答「哪些到补货点了」就跑它，口径固定 |
+| `mp/alert.py` | 触发检查与推送，`state/alerted.json` 去重。与 status 的区别：alert 只报**新**触发 |
 | `mp/notify.py` | Server酱。tag 写死 `DEFAULT_TAGS = "laomo"` |
 | `model/plan.py` | 读 `model/params.json` 生成计划。改 params 即改模型 |
 
