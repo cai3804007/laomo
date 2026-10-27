@@ -25,7 +25,10 @@ def collect() -> tuple[list, str]:
         rows.append({
             "name": p["name"].lstrip("XD"), "code": c, "px": px,
             "chg": (px - q["prev_close"]) / q["prev_close"] * 100,
+            "entry": p["entry"], "entry_date": p.get("entry_date", ""),
+            "vs_entry": (px - p["entry"]) / p["entry"] * 100,
             "cost": cost, "vs_cost": (px - cost) / cost * 100,
+            "tranches": ts,
             "fired": [t for t in ts if px <= t["buy"]],
             "next": next((t for t in ts if px > t["buy"]), None),
             "inferred": p.get("inferred", False),
@@ -44,14 +47,15 @@ def render(rows: list, stamp: str) -> str:
 
     if hit:
         L += [f"### 已触及补货点（{len(hit)} 只）", "",
-              "| 标的 | 现价 | 今日 | 成本 | 相对成本 | 已触发 | 下一档 | 来源 |",
-              "|---|---|---|---|---|---|---|---|"]
+              "| 标的 | 现价 | 今日 | 建仓价 | 最新成本 | 相对成本 | 已触发档位（价） | 下一档 | 来源 |",
+              "|---|---|---|---|---|---|---|---|---|"]
         for r in hit:
-            nx = (f"补{r['next']['n']} {r['next']['buy']:g}"
+            nx = (f"补{r['next']['n']} **{r['next']['buy']:g}**"
                   f"（{(r['next']['buy']-r['px'])/r['px']*100:+.1f}%）" if r["next"] else "**全档已破**")
-            L.append(f"| {r['name']} {r['code']} | {r['px']:g} | {r['chg']:+.1f}% | {r['cost']:g} "
-                     f"| {r['vs_cost']:+.1f}% | **补{','.join(str(t['n']) for t in r['fired'])}** "
-                     f"| {nx} | {'推定' if r['inferred'] else '真实'} |")
+            fired = "、".join(f"补{t['n']} {t['buy']:g}" for t in r["fired"])
+            L.append(f"| {r['name']} {r['code']} | {r['px']:g} | {r['chg']:+.1f}% "
+                     f"| {r['entry']:g} | {r['cost']:g} | {r['vs_cost']:+.1f}% "
+                     f"| **{fired}** | {nx} | {'推定' if r['inferred'] else '真实'} |")
         near = [r for r in hit if r["next"] and (r["next"]["buy"]-r["px"])/r["px"]*100 > -1.0]
         if near:
             L += ["", "> ⏰ 盘中可能随时触到下一档：" + "、".join(
@@ -59,10 +63,24 @@ def render(rows: list, stamp: str) -> str:
         L.append("")
 
     L += [f"### 尚未触发（{len(safe)} 只）", "",
-          "| 标的 | 现价 | 相对成本 | 距补1 | 来源 |", "|---|---|---|---|---|"]
+          "| 标的 | 现价 | 建仓价 | 最新成本 | 相对成本 | 补1 价 | 还需跌 | 来源 |",
+          "|---|---|---|---|---|---|---|---|"]
     for r in safe:
-        L.append(f"| {r['name']} {r['code']} | {r['px']:g} | {r['vs_cost']:+.1f}% "
+        L.append(f"| {r['name']} {r['code']} | {r['px']:g} | {r['entry']:g} | {r['cost']:g} "
+                 f"| {r['vs_cost']:+.1f}% | **{r['next']['buy']:g}** "
                  f"| {(r['next']['buy']-r['px'])/r['px']*100:+.1f}% | {'推定' if r['inferred'] else '真实'} |")
+
+    # 完整档位表：三档价格一次看全
+    L += ["", "### 各标的完整补货档位", "",
+          "| 标的 | 建仓价 | 补1 | 补2 | 补3 | 现价 | 来源 |", "|---|---|---|---|---|---|---|"]
+    for r in sorted(rows, key=lambda x: x["name"]):
+        cells = []
+        for t in r["tranches"]:
+            cells.append(f"~~{t['buy']:g}~~" if r["px"] <= t["buy"] else f"{t['buy']:g}")
+        L.append(f"| {r['name']} | {r['entry']:g} | " + " | ".join(cells)
+                 + f" | {r['px']:g} | {'推定' if r['inferred'] else '真实'} |")
+    L.append("")
+    L.append("> ~~删除线~~ = 该档已跌破")
 
     n_inf = sum(1 for r in hit if r["inferred"])
     L += ["", "---", "", "**读这张表必须知道的三件事：**", "",
